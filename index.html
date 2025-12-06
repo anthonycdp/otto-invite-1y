@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aniversário do Otto - 1 Ano</title>
+    <meta name="description" content="Venha brincar com a gente nessa aventura especial!" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Titan One (Logo style), Fredoka (Playful), Nunito (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Fredoka:wght@300;400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Config for Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              toy: ['Titan One', 'cursive'],
+              heading: ['Fredoka', 'cursive'],
+              body: ['Nunito', 'sans-serif'],
+            },
+            colors: {
+              toyBlue: '#1D4E89', /* Deeper blue for contrast */
+              toyLightBlue: '#48A7F9', /* Sky blue */
+              toyYellow: '#F9D948',
+              toyRed: '#E63946',
+              toyGreen: '#8CB369',
+              toyPurple: '#9C27B0',
+              toyCloud: '#F0F9FF',
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'float-delayed': 'float 6s ease-in-out 3s infinite',
+              'bounce-slow': 'bounce 3s infinite',
+              'spin-slow': 'spin 12s linear infinite',
+              'pop': 'pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              pop: {
+                '0%': { transform: 'scale(0)' },
+                '100%': { transform: 'scale(1)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #48A7F9;
+        overflow-x: hidden;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Fredoka', cursive;
+      }
+      
+      /* Toy Story Text Effect */
+      .text-toy-story {
+        font-family: 'Titan One', cursive;
+        color: #F9D948;
+        -webkit-text-stroke: 1.5px #1D4E89; /* Blue outline */
+        text-shadow: 4px 4px 0px #1D4E89; /* Hard block shadow */
+      }
+      
+      /* Cloud Pattern CSS (Andy's Room) */
+      .bg-clouds {
+        background-color: #48A7F9;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.5' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 5.74c.95 1.13 1.88 2.41 2.8 3.86A4 4 0 0 1 56 14v2a2 2 0 0 0-2 2v.07a25.98 25.98 0 0 0 0 9.93H56z'%3E%3C/path%3E%3C/svg%3E");
+      }
+
+      /* Cow Print Pattern */
+      .bg-cow {
+        background-color: white;
+        background-image: radial-gradient(black 15%, transparent 16%),
+        radial-gradient(black 15%, transparent 16%);
+        background-size: 60px 60px;
+        background-position: 0 0, 30px 30px;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-clouds text-gray-800">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
