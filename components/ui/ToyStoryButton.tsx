@@ -18,28 +18,39 @@ const ToyStoryButton: React.FC<ToyStoryButtonProps> = ({
       className={`
         relative font-heading font-bold rounded-full transition-all duration-200
         bg-toyYellow border-b-4 border-yellow-600 text-yellow-900
-        shadow-lg hover:bg-yellow-300 hover:border-yellow-700
-        active:scale-95 active:border-b-2 active:translate-y-1 active:shadow-none
+        shadow-lg active:scale-95 active:border-b-2 active:translate-y-1 active:shadow-none
         focus:outline-none focus:ring-4 focus:ring-toyYellow/50
-        px-8 py-4 text-xl min-w-[200px] overflow-hidden group
+        px-8 py-4 text-xl min-w-[200px] overflow-hidden
         ${className}
       `}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95, y: 4 }}
       initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        type: "spring",
-        stiffness: 400,
-        damping: 17,
-        delay: 0.8
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: [1, 1.05, 1],
       }}
+      transition={{
+        opacity: { type: "spring", stiffness: 400, damping: 17, delay: 0.8 },
+        scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 2 }
+      }}
+      whileTap={{ scale: 0.95, y: 4 }}
     >
-      {/* Efeito de brilho ao passar o mouse */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+      {/* Efeito de brilho contínuo */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+        animate={{
+          x: ['-100%', '200%']
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 1
+        }}
+      />
 
       {/* Texto do botão */}
-      <span className="relative z-10 flex items-center justify-center gap-2">
+      <motion.span className="relative z-10 flex items-center justify-center gap-2">
         {children}
         {/* Ícone do Woody */}
         <motion.svg
@@ -58,11 +69,11 @@ const ToyStoryButton: React.FC<ToyStoryButtonProps> = ({
         >
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </motion.svg>
-      </span>
+      </motion.span>
 
-      {/* Estrelas animadas ao redor do botão */}
+      {/* Estrelas animadas ao redor do botão - sempre visíveis */}
       <motion.svg
-        className="absolute -top-2 -left-2 text-yellow-600 opacity-0 group-hover:opacity-100"
+        className="absolute -top-2 -left-2 text-yellow-600"
         width="20"
         height="20"
         viewBox="0 0 24 24"
@@ -83,7 +94,7 @@ const ToyStoryButton: React.FC<ToyStoryButtonProps> = ({
       </motion.svg>
 
       <motion.svg
-        className="absolute -top-1 -right-2 text-yellow-600 opacity-0 group-hover:opacity-100"
+        className="absolute -top-1 -right-2 text-yellow-600"
         width="16"
         height="16"
         viewBox="0 0 24 24"

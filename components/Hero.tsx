@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/Button';
 import ToyStoryButton from './ui/ToyStoryButton';
 import FloatingParticles from './FloatingParticles';
+import HeroBackground from './HeroBackground';
 import { Star, Cloud, Trophy } from 'lucide-react';
 
 const Hero: React.FC = () => {
@@ -12,6 +13,9 @@ const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      {/* Background Image Responsive */}
+      <HeroBackground />
+
       {/* Floating Particles Background */}
       <FloatingParticles />
       
@@ -117,11 +121,15 @@ const Hero: React.FC = () => {
           className="mb-4"
         >
           <motion.div
-            className="relative text-toyYellow drop-shadow-lg cursor-pointer"
-            whileHover={{
-              scale: 1.2,
-              rotate: [0, -10, 10, 0],
-              transition: { duration: 0.5 }
+            className="relative text-toyYellow drop-shadow-lg"
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, -5, 5, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
           >
             <motion.div
@@ -173,17 +181,32 @@ const Hero: React.FC = () => {
           <motion.h1
             className="text-toy-story text-7xl md:text-9xl leading-none"
             initial={{ scale: 0, rotate: -15 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 200,
-              damping: 15,
-              delay: 0.8
+            animate={{
+              scale: [1, 1.05, 1],
+              rotate: 0,
+              textShadow: [
+                "2px 2px 0px rgba(0,0,0,0.2)",
+                "0 0 30px rgba(255,255,0,0.5)",
+                "2px 2px 0px rgba(0,0,0,0.2)"
+              ]
             }}
-            whileHover={{
-              scale: 1.1,
-              textShadow: "0 0 30px rgba(255,255,0,0.5)",
-              transition: { duration: 0.3 }
+            transition={{
+              scale: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              },
+              textShadow: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              },
+              rotate: {
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+                delay: 0.8
+              }
             }}
           >
             OTTO
@@ -203,9 +226,13 @@ const Hero: React.FC = () => {
           >
             <motion.div
               className="bg-toyRed transform -skew-x-6 inline-block px-8 py-2 border-2 border-red-800 shadow-[0_4px_0_rgba(0,0,0,0.2)]"
-              whileHover={{
-                y: -5,
-                transition: { duration: 0.2 }
+              animate={{
+                y: [0, -5, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
               }}
             >
               <motion.span
@@ -232,19 +259,23 @@ const Hero: React.FC = () => {
         {/* Date / Info */}
         <motion.div
           initial={{ opacity: 0, y: 50, rotateX: 90 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            scale: [1, 1.02, 1],
+            boxShadow: [
+              "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+              "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+              "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+            ]
+          }}
           transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 15,
-            delay: 1.2
+            opacity: { type: "spring", stiffness: 100, damping: 15, delay: 1.2 },
+            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+            boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" }
           }}
           className="bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border-4 border-toyBlue max-w-sm w-full mx-auto mb-8 relative"
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-            transition: { duration: 0.3 }
-          }}
         >
           {/* Animated Blue pins/screws in corners */}
           {[
