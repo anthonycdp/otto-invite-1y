@@ -40,7 +40,7 @@ function App() {
           <motion.div
             key="hero"
             {...transitions[InvitationStep.HERO]}
-            className="min-h-screen"
+            className="h-dvh overflow-hidden"
           >
             <Header />
             <main>
@@ -54,7 +54,7 @@ function App() {
           <motion.div
             key="info"
             {...transitions[InvitationStep.INFO]}
-            className="h-screen"
+            className="h-dvh overflow-hidden"
           >
             <Header />
             <main>
@@ -67,7 +67,7 @@ function App() {
           <motion.div
             key="rsvp"
             {...transitions[InvitationStep.RSVP]}
-            className="h-screen"
+            className="h-dvh overflow-hidden"
           >
             <Header />
             <main>

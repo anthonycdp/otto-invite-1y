@@ -64,7 +64,7 @@ const GiftModal: React.FC<GiftModalProps> = ({ isOpen, onClose }) => {
     {
       icon: Gift,
       title: "Brinquedos",
-      description: "Toys Story temáticos",
+      description: "Diversos tipos",
       color: "toyPurple"
     }
   ];
@@ -113,7 +113,7 @@ const GiftModal: React.FC<GiftModalProps> = ({ isOpen, onClose }) => {
                 textShadow: '2px 2px 4px rgba(0,0,0,0.2)'
               }}
             >
-              Caixinha da Felicidade
+              Dicas de Presentes
             </h2>
           </div>
           <motion.button

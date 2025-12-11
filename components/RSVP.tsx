@@ -30,19 +30,19 @@ const Counter: React.FC<CounterProps> = ({ value, onChange, min = 0, max = 10, c
   };
 
   return (
-    <div className={`flex items-center justify-between w-full px-4 py-2 rounded-xl border-2 ${bgLight} ${border}`}>
+    <div className={`flex items-center justify-between w-full px-4 sm:px-5 py-2.5 sm:py-3.5 rounded-xl border-2 ${bgLight} ${border}`}>
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         type="button"
         onClick={handleDecrement}
         disabled={value <= min}
-        className={`w-8 h-8 flex items-center justify-center rounded-full ${btnBg} ${btnText} disabled:opacity-50 disabled:cursor-not-allowed transition-colors`}
+        className={`w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full ${btnBg} ${btnText} disabled:opacity-50 disabled:cursor-not-allowed transition-colors`}
       >
-        <Minus size={16} strokeWidth={3} />
+        <Minus size={20} strokeWidth={3} />
       </motion.button>
       
-      <span className={`text-2xl font-heading ${text} font-bold`}>
+      <span className={`text-2xl sm:text-3xl font-heading ${text} font-bold`}>
         {value}
       </span>
 
@@ -52,9 +52,9 @@ const Counter: React.FC<CounterProps> = ({ value, onChange, min = 0, max = 10, c
         type="button"
         onClick={handleIncrement}
         disabled={value >= max}
-        className={`w-8 h-8 flex items-center justify-center rounded-full ${btnBg} ${btnText} disabled:opacity-50 disabled:cursor-not-allowed transition-colors`}
+        className={`w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full ${btnBg} ${btnText} disabled:opacity-50 disabled:cursor-not-allowed transition-colors`}
       >
-        <Plus size={16} strokeWidth={3} />
+        <Plus size={20} strokeWidth={3} />
       </motion.button>
     </div>
   );
@@ -129,27 +129,34 @@ const RSVP: React.FC = () => {
     e.preventDefault();
     setStatus('loading');
 
-    const GOOGLE_SCRIPT_URL = import.meta.env.VITE_SHEETS_URL;
+    const GOOGLE_SCRIPT_URL = import.meta.env.VITE_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbzhvCKuWCr6jZfopLmW837nFwAvN3kTnKxeP8xF8ML1yJZibwToc9J0vaIWJgA65qbJ/exec';
+    if (!GOOGLE_SCRIPT_URL) {
+      console.error('URL do Google Script não configurada');
+      setStatus('error');
+      return;
+    }
 
     console.log('URL do script:', GOOGLE_SCRIPT_URL);
     console.log('Dados a enviar:', formData);
 
     try {
-      // Usar FormData para compatibilidade com no-cors
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('adults', formData.adults.toString());
-      formDataToSend.append('children', formData.children.toString());
-      formDataToSend.append('message', formData.message || '');
+      const body = new URLSearchParams({
+        name: formData.name,
+        adults: formData.adults.toString(),
+        children: formData.children.toString(),
+        message: formData.message || ''
+      });
 
+      // Usa no-cors porque o Apps Script não permite definir CORS customizado
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: formDataToSend,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: body.toString(),
       });
 
-      // Com no-cors, assumimos sucesso
-      console.log('Requisicao enviada com sucesso');
       setStatus('success');
 
     } catch (error) {
@@ -159,7 +166,7 @@ const RSVP: React.FC = () => {
   };
 
   return (
-    <section id="rsvp" className="relative h-screen overflow-hidden">
+    <section id="rsvp" className="relative h-dvh flex flex-col overflow-hidden">
       {/* Background Image */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
@@ -169,10 +176,9 @@ const RSVP: React.FC = () => {
         transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
       ></motion.div>
 
-      {/* Scrollable Content */}
-      <div className="absolute inset-0 overflow-y-auto py-4 md:py-8 z-10 flex items-center justify-center">
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-xl mx-auto relative">
+      {/* Content - Centered */}
+      <div className="relative z-10 flex-1 flex items-center justify-center pt-14 sm:pt-20 pb-6 px-4">
+        <div className="w-full max-w-sm sm:max-w-lg md:max-w-2xl relative">
             {/* Buzz Lightyear - Left (Overlapping Card) */}
             <motion.div
               className="absolute -left-20 bottom-0 w-48 md:w-64 z-20 pointer-events-none hidden md:block"
@@ -209,17 +215,17 @@ const RSVP: React.FC = () => {
 
             {/* Main Card */}
             <motion.div
-              className="bg-amber-50 rounded-3xl shadow-2xl overflow-hidden border-4 border-blue-900/30 relative z-10"
+              className="bg-amber-50 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border-2 sm:border-4 border-blue-900/30 relative z-10"
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               whileInView={{ scale: 1, opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ type: "spring", duration: 0.8, bounce: 0.4 }}
             >
               {/* Header with Sheriff Badge */}
-              <div className="pt-4 pb-2 text-center relative">
+              <div className="pt-2 sm:pt-4 pb-1 sm:pb-2 text-center relative">
                 {/* Sheriff Badge */}
                 <motion.div
-                  className="flex justify-center -mt-2 mb-1"
+                  className="flex justify-center -mt-1 sm:-mt-2 mb-0 sm:mb-1"
                   initial={{ scale: 0, rotate: -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
@@ -238,7 +244,7 @@ const RSVP: React.FC = () => {
                       delay: 1
                     }}
                   >
-                    <SheriffBadge className="w-24 h-24 md:w-28 md:h-28 drop-shadow-lg" />
+                    <SheriffBadge className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 drop-shadow-lg" />
                   </motion.div>
                 </motion.div>
 
@@ -250,7 +256,7 @@ const RSVP: React.FC = () => {
                   transition={{ delay: 0.3 }}
                 >
                   <motion.h2
-                    className="text-4xl md:text-5xl font-toy drop-shadow-md mb-1"
+                    className="text-3xl sm:text-4xl md:text-6xl font-toy drop-shadow-md mb-0 sm:mb-1"
                     style={{
                       background: 'linear-gradient(180deg, #8B4513 0%, #D2691E 50%, #8B4513 100%)',
                       WebkitBackgroundClip: 'text',
@@ -276,7 +282,7 @@ const RSVP: React.FC = () => {
                   </motion.h2>
                 </motion.div>
                 <motion.p
-                  className="text-gray-600 font-body font-semibold text-sm md:text-base"
+                  className="text-gray-600 font-body font-semibold text-sm sm:text-base md:text-xl"
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
@@ -286,10 +292,10 @@ const RSVP: React.FC = () => {
                 </motion.p>
               </div>
 
-            <div className="px-6 md:px-8 pb-6">
+            <div className="px-4 sm:px-6 md:px-8 pb-4 sm:pb-6">
               {status === 'success' ? (
                 <motion.div
-                  className="text-center py-8"
+                  className="text-center py-4 sm:py-8"
                   initial={{ opacity: 0, scale: 0.8, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -418,18 +424,18 @@ const RSVP: React.FC = () => {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-3">
+                <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                   {/* Name Input */}
                   <motion.div
                     initial={{ x: -50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.5 }}
                   >
-                    <label htmlFor="name" className="block text-gray-700 font-bold mb-2 font-heading text-sm">
+                    <label htmlFor="name" className="block text-gray-700 font-bold mb-1 sm:mb-2 font-heading text-sm sm:text-base">
                       Nome do Cowboy/Cowgirl
                     </label>
                     <div
-                      className="rounded-xl overflow-hidden"
+                      className="rounded-lg sm:rounded-xl overflow-hidden"
                       style={{
                         background: 'linear-gradient(180deg, #DEB887 0%, #D2B48C 50%, #C4A76C 100%)',
                         boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.1)'
@@ -443,21 +449,21 @@ const RSVP: React.FC = () => {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-transparent outline-none font-body font-semibold text-amber-900 placeholder-amber-800/60 transition-colors"
+                        className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-transparent outline-none font-body font-semibold text-amber-900 placeholder-amber-800/60 transition-colors text-base sm:text-lg"
                         placeholder="Ex: Woody da Silva"
                       />
                     </div>
                   </motion.div>
 
                   {/* Adults and Children Selectors */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-5">
                     {/* Adults */}
                     <motion.div
                       initial={{ x: -50, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: 0.6 }}
                     >
-                      <label htmlFor="adults" className="block text-gray-700 font-bold mb-2 font-heading text-sm">
+                      <label htmlFor="adults" className="block text-gray-700 font-bold mb-1 sm:mb-2 font-heading text-sm sm:text-base">
                         Adultos
                       </label>
                       <Counter
@@ -475,7 +481,7 @@ const RSVP: React.FC = () => {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: 0.6 }}
                     >
-                      <label htmlFor="children" className="block text-gray-700 font-bold mb-2 font-heading text-sm">
+                      <label htmlFor="children" className="block text-gray-700 font-bold mb-1 sm:mb-2 font-heading text-sm sm:text-base">
                         Criancas
                       </label>
                       <Counter
@@ -494,15 +500,15 @@ const RSVP: React.FC = () => {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.7 }}
                   >
-                    <label htmlFor="message" className="block text-gray-700 font-bold mb-2 font-heading text-sm">
+                    <label htmlFor="message" className="block text-gray-700 font-bold mb-1 sm:mb-2 font-heading text-sm sm:text-base">
                       Mensagem (Opcional)
                     </label>
-                    <div className="bg-amber-100 rounded-xl overflow-hidden border-2 border-amber-200">
+                    <div className="bg-amber-100 rounded-lg sm:rounded-xl overflow-hidden border-2 border-amber-200">
                       <SpiralTop />
                       <div
                         className="relative"
                         style={{
-                          background: 'repeating-linear-gradient(transparent, transparent 27px, #E5D9C9 28px)'
+                          background: 'repeating-linear-gradient(transparent, transparent 23px, #E5D9C9 24px)'
                         }}
                       >
                         <motion.textarea
@@ -512,8 +518,8 @@ const RSVP: React.FC = () => {
                           value={formData.message}
                           onChange={handleChange}
                           rows={3}
-                          className="w-full px-4 py-2 bg-transparent outline-none font-body text-gray-700 placeholder-gray-400 resize-none transition-colors"
-                          style={{ lineHeight: '28px' }}
+                          className="w-full px-4 sm:px-5 py-2 sm:py-3 bg-transparent outline-none font-body text-gray-700 placeholder-gray-400 resize-none transition-colors text-base sm:text-lg"
+                          style={{ lineHeight: '24px' }}
                           placeholder="Amigo estou aqui..."
                         />
                       </div>
@@ -524,7 +530,7 @@ const RSVP: React.FC = () => {
                   <motion.button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full py-4 px-8 rounded-full font-heading font-bold text-xl text-white flex items-center justify-center gap-3 transition-all duration-200 transform active:scale-95 active:translate-y-1 disabled:opacity-70 relative overflow-hidden"
+                    className="w-full py-4 sm:py-5 px-7 sm:px-9 rounded-full font-heading font-bold text-lg sm:text-xl md:text-2xl text-white flex items-center justify-center gap-2 sm:gap-3 transition-all duration-200 transform active:scale-95 active:translate-y-1 disabled:opacity-70 relative overflow-hidden"
                     style={{
                       background: 'linear-gradient(180deg, #DC2626 0%, #B91C1C 100%)',
                       boxShadow: '0 6px 0 #7F1D1D, 0 8px 10px rgba(0,0,0,0.3)',
@@ -576,7 +582,7 @@ const RSVP: React.FC = () => {
                           animate={{ rotate: [45, 55, 45] }}
                           transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
                         >
-                          <Rocket size={24} />
+                          <Rocket size={28} />
                         </motion.div>
                       </div>
                     )}
@@ -586,7 +592,6 @@ const RSVP: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </div>
       </div>
     </section>
   );
