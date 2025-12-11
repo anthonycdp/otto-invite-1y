@@ -12,7 +12,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
 
   return (
-    <section id="hero" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-4 md:pt-16">
+    <section id="hero" className="relative w-full h-dvh flex flex-col items-center justify-between overflow-hidden pt-12 sm:pt-14 md:pt-16 pb-0">
       {/* Background Image Responsive */}
       <HeroBackground />
 
@@ -104,9 +104,9 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
       ))}
       
       {/* Decorative Floor (Wood style) - Only visible at bottom */}
-      <div className="absolute bottom-0 w-full h-12 md:h-16 bg-[#D4A373] border-t-8 border-[#BC8A5F] z-0"></div>
+      <div className="absolute bottom-0 w-full h-6 sm:h-8 md:h-16 bg-[#D4A373] border-t-4 sm:border-t-8 border-[#BC8A5F] z-0"></div>
 
-      <div className="container mx-auto px-4 z-10 text-center flex flex-col items-center relative">
+      <div className="container mx-auto px-4 z-10 text-center flex flex-col items-center justify-center flex-1 relative">
 
         {/* Sheriff Star Badge at top */}
         <motion.div
@@ -118,10 +118,10 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
             damping: 20,
             delay: 0.2
           }}
-          className="mb-6 animate-[pop_0.6s_cubic-bezier(0.34,1.56,0.64,1)]"
+          className="mb-2 sm:mb-4 md:mb-6 animate-[pop_0.6s_cubic-bezier(0.34,1.56,0.64,1)]"
         >
           <motion.div
-            className="relative w-32 h-32 md:w-44 md:h-44 drop-shadow-2xl cursor-default group hover:scale-110 transition-transform duration-300"
+            className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-52 md:h-52 drop-shadow-2xl cursor-default group hover:scale-110 transition-transform duration-300"
             animate={{
               scale: [1, 1.1, 1],
               rotate: [0, -5, 5, 0],
@@ -197,7 +197,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
             damping: 15,
             delay: 0.4
           }}
-          className="relative mb-8 cursor-default"
+          className="relative mb-4 sm:mb-6 md:mb-8 cursor-default"
         >
           {/* Top Text */}
           <motion.div
@@ -209,14 +209,27 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
               damping: 20,
               delay: 0.6
             }}
-            className="font-heading text-white text-2xl md:text-3xl font-bold tracking-widest drop-shadow-md mb-[-10px] uppercase"
+            className="font-heading text-white text-xl sm:text-2xl md:text-4xl font-bold tracking-widest drop-shadow-md mb-[-8px] sm:mb-[-10px] uppercase"
           >
             Aniversário do
           </motion.div>
 
+          {/* Red Banner - "Faz 1 Ano" */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 150,
+              damping: 20,
+              delay: 1
+            }}
+            className="relative z-0"
+          >
+
           {/* Main Name - Toy Story Style */}
           <motion.h1
-            className="text-toy-story text-8xl md:text-[10rem] leading-none"
+            className="text-toy-story text-8xl sm:text-9xl md:text-[16rem] leading-none relative z-20"
             initial={{ scale: 0, rotate: -15 }}
             animate={{
               scale: [1, 1.05, 1],
@@ -248,21 +261,8 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
           >
             OTTO
           </motion.h1>
-
-          {/* Red Banner - "Faz 1 Ano" */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 150,
-              damping: 20,
-              delay: 1
-            }}
-            className="relative mt-[-10px] z-10"
-          >
             <motion.div
-              className="bg-toyRed transform -skew-x-6 inline-block px-10 py-3 border-2 border-red-800 shadow-[0_4px_0_rgba(0,0,0,0.2)]"
+              className="bg-toyRed transform -skew-x-6 inline-block px-8 sm:px-10 md:px-14 py-3 sm:py-4 border-2 border-red-800 shadow-[0_4px_0_rgba(0,0,0,0.2)] mt-4 sm:mt-6 md:mt-8"
               animate={{
                 y: [0, -5, 0],
               }}
@@ -273,7 +273,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
               }}
             >
               <motion.span
-                className="block transform skew-x-6 font-toy text-white text-3xl md:text-5xl tracking-wide text-shadow-sm"
+                className="block transform skew-x-6 font-toy text-white text-2xl sm:text-3xl md:text-6xl tracking-wide text-shadow-sm"
                 animate={{
                   textShadow: [
                     "2px 2px 0px rgba(0,0,0,0.2)",
@@ -303,7 +303,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
             damping: 15,
             delay: 1.2
           }}
-          className="flex flex-col items-center gap-1 mb-10 animate-[fade-up_1s_ease-out_0.5s]"
+          className="flex flex-col items-center gap-1 mb-4 sm:mb-6 md:mb-10 animate-[fade-up_1s_ease-out_0.5s]"
         >
           {/* "Venha Brincar" Tag */}
           <motion.div
@@ -315,10 +315,10 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
               scale: 1.05,
               transition: { duration: 0.2 }
             }}
-            className="bg-white text-toyBlue px-4 py-1 transform rotate-2 border-2 border-toyBlue rounded-full shadow-md z-10 mb-2"
+            className="bg-white text-toyBlue px-4 sm:px-5 py-1.5 transform rotate-2 border-2 border-toyBlue rounded-full shadow-md z-10 mb-1 sm:mb-2"
           >
             <motion.span
-              className="font-heading font-bold tracking-wider text-base md:text-lg uppercase"
+              className="font-heading font-bold tracking-wider text-base sm:text-lg md:text-xl uppercase"
               animate={{
                 textShadow: [
                   "1px 1px 0px rgba(59, 130, 246, 0.2)",
@@ -344,9 +344,9 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
             transition={{ delay: 1.4 }}
           >
             {/* Number Blocks */}
-            <div className="flex items-center gap-3 z-10">
+            <div className="flex items-center gap-3 sm:gap-4 z-10">
               <motion.div
-                className="w-20 h-20 md:w-24 md:h-24 bg-toyRed border-b-8 border-r-8 border-t-2 border-l-2 border-red-800 rounded-lg shadow-xl flex items-center justify-center transform -rotate-6 transition-transform hover:rotate-0 hover:scale-110 duration-300"
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 bg-toyRed border-b-4 sm:border-b-8 border-r-4 sm:border-r-8 border-t-2 border-l-2 border-red-800 rounded-lg shadow-xl flex items-center justify-center transform -rotate-6 transition-transform hover:rotate-0 hover:scale-110 duration-300"
                 whileHover={{
                   rotate: 0,
                   scale: 1.1,
@@ -363,7 +363,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
                 }}
               >
                 <motion.span
-                  className="font-heading text-5xl md:text-6xl text-white font-bold drop-shadow-md"
+                className="font-heading text-4xl sm:text-5xl md:text-7xl text-white font-bold drop-shadow-md"
                   animate={{
                     textShadow: [
                       "2px 2px 0px rgba(0,0,0,0.3)",
@@ -382,7 +382,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
               </motion.div>
 
               <motion.div
-                className="w-20 h-20 md:w-24 md:h-24 bg-toyGreen border-b-8 border-r-8 border-t-2 border-l-2 border-green-800 rounded-lg shadow-xl flex items-center justify-center transform rotate-6 transition-transform hover:rotate-0 hover:scale-110 duration-300"
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 bg-toyGreen border-b-4 sm:border-b-8 border-r-4 sm:border-r-8 border-t-2 border-l-2 border-green-800 rounded-lg shadow-xl flex items-center justify-center transform rotate-6 transition-transform hover:rotate-0 hover:scale-110 duration-300"
                 whileHover={{
                   rotate: 0,
                   scale: 1.1,
@@ -399,7 +399,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
                 }}
               >
                 <motion.span
-                  className="font-heading text-5xl md:text-6xl text-white font-bold drop-shadow-md"
+                className="font-heading text-4xl sm:text-5xl md:text-7xl text-white font-bold drop-shadow-md"
                   animate={{
                     textShadow: [
                       "2px 2px 0px rgba(0,0,0,0.3)",
@@ -420,7 +420,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
 
             {/* Month Label */}
             <motion.div
-              className="bg-toyBlue px-8 py-2 rounded-lg border-2 border-white shadow-lg -mt-4 pt-6 z-0 transform rotate-1"
+              className="bg-toyBlue px-5 sm:px-8 md:px-10 py-1.5 sm:py-2.5 rounded-lg border-2 border-white shadow-lg -mt-3 sm:-mt-4 pt-4 sm:pt-6 z-0 transform rotate-1"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5 }}
@@ -431,7 +431,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
               }}
             >
               <motion.span
-                className="font-heading text-2xl md:text-3xl text-white font-bold tracking-widest uppercase drop-shadow-sm"
+                className="font-heading text-xl sm:text-2xl md:text-4xl text-white font-bold tracking-widest uppercase drop-shadow-sm"
                 animate={{
                   textShadow: [
                     "2px 2px 0px rgba(0,0,0,0.3)",
@@ -452,14 +452,14 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
 
           {/* Time and Location Container */}
           <motion.div
-            className="mt-6 flex flex-col items-center gap-2"
+            className="mt-3 sm:mt-4 md:mt-6 flex flex-col items-center gap-1 sm:gap-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6 }}
           >
             {/* Time Badge */}
             <motion.div
-              className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-5 py-2 rounded-full border-2 border-toyBlue shadow-sm hover:scale-105 transition-transform"
+              className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full border-2 border-toyBlue shadow-sm hover:scale-105 transition-transform"
               whileHover={{
                 scale: 1.05,
                 backgroundColor: "rgba(255, 255, 255, 1)"
@@ -489,14 +489,14 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
                   ease: "easeInOut"
                 }}
               />
-              <span className="font-heading text-toyBlue text-xl md:text-2xl font-bold">
+              <span className="font-heading text-toyBlue text-lg sm:text-xl md:text-2xl font-bold">
                 SÁBADO • 18:00H
               </span>
             </motion.div>
 
             {/* Location */}
             <motion.div
-              className="font-heading text-toyYellow font-bold text-lg md:text-xl uppercase tracking-tight text-shadow-sm"
+              className="font-heading text-toyYellow font-bold text-base sm:text-lg md:text-2xl uppercase tracking-tight text-shadow-sm"
               animate={{
                 x: [0, 3, 0],
                 textShadow: [
@@ -517,9 +517,11 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
         </motion.div>
 
         {/* Animated Button */}
-        <ToyStoryButton onClick={onOpenInvitation}>
-          Abrir Convite
-        </ToyStoryButton>
+        <div className="pb-8 sm:pb-10 md:pb-12 flex-shrink-0">
+          <ToyStoryButton onClick={onOpenInvitation}>
+            Abrir Convite
+          </ToyStoryButton>
+        </div>
       </div>
     </section>
   );
