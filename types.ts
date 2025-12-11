@@ -1,3 +1,9 @@
+export enum InvitationStep {
+  HERO = 'hero',
+  INFO = 'info',
+  RSVP = 'rsvp'
+}
+
 export interface NavItem {
   label: string;
   href: string;

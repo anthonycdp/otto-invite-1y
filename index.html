@@ -5,7 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aniversário do Otto - 1 Ano</title>
     <meta name="description" content="Venha brincar com a gente nessa aventura especial!" />
-    
+
+    <!-- Open Graph / WhatsApp Meta Tags -->
+    <meta property="og:title" content="Aniversário do Otto - 1 Ano 🎉" />
+    <meta property="og:description" content="Venha brincar com a gente nessa aventura especial do Otto! Tema Toy Story. Confirme sua presença!" />
+    <meta property="og:image" content="https://melodious-pie-7a69b8.netlify.app/open-tag-img.jpeg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://melodious-pie-7a69b8.netlify.app/" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aniversário do Otto - 1 Ano 🎉" />
+    <meta name="twitter:description" content="Venha brincar com a gente nessa aventura especial do Otto! Tema Toy Story. Confirme sua presença!" />
+    <meta name="twitter:image" content="/open-tag-img.jpeg" />
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -33,6 +46,16 @@
               toyPurple: '#9C27B0',
               toyCloud: '#F0F9FF',
             },
+            height: {
+              'dvh': '100dvh',
+              'svh': '100svh',
+            },
+            minHeight: {
+              'dvh': '100dvh',
+            },
+            padding: {
+              'safe': 'env(safe-area-inset-bottom)',
+            },
             animation: {
               'float': 'float 6s ease-in-out infinite',
               'float-delayed': 'float 6s ease-in-out 3s infinite',
@@ -58,8 +81,22 @@
     <style>
       body {
         font-family: 'Nunito', sans-serif;
-        background-color: #48A7F9;
+        background: #F0F9FF url('/transition-bg.jpg') center/cover no-repeat fixed;
         overflow-x: hidden;
+      }
+
+      /* Overlay escuro com blur para a imagem de fundo */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        z-index: -1;
       }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Fredoka', cursive;
@@ -100,7 +137,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-clouds text-gray-800">
+  <body class="text-gray-800">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
