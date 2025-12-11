@@ -4,6 +4,8 @@ Um convite digital interativo para festa de 1 ano de aniversário com tema Toy S
 
 ## Visão Geral
 
+![Convite do Otto - Screenshot](README-screenshot.png)
+
 Este é um aplicativo web React responsivo para o convite de aniversário de 1 ano do Otto. O app apresenta:
 - Design temático de Toy Story com cores vibrantes e animações
 - Navegação suave entre seções
