@@ -490,7 +490,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenInvitation }) => {
                 }}
               />
               <span className="font-heading text-toyBlue text-lg sm:text-xl md:text-2xl font-bold">
-                SÁBADO • 18:00H
+                DOMINGO • 18:00H
               </span>
             </motion.div>
 
